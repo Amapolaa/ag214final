@@ -1,20 +1,14 @@
 # The input to this function should be a data frame containing stream chemistry data
 moving_average <- function(streamdata) {
   # Initialize a tibble to contain the results
-
-  streamdata <- streamdata |>
-  select(Sample_Date, Sample_ID, `NH4-N`,`NO3-N`, Ca, Mg, K) |>
-  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
-  
- 
-
+  # I would recommned instead of including filtering data as part of the function, filter it before then feed the filtered data into the function.
   result <- tibble(
     Sample_Date = seq(
       ymd(streamdata$Sample_Date[1]),
       ymd(streamdata$Sample_Date[nrow(streamdata)]),
       by = "63 days",
     ),
-    site = streamdata$Sample_Date
+    site = streamdata$Sample_Date,
     NH4N = NA,
     NO3N = NA,
     Ca = NA,

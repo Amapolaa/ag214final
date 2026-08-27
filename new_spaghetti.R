@@ -25,7 +25,9 @@ q1_smoothed <- tibble(
   Mg = NA
 )
 
-
+streamdata <- streamdata |>
+  select(Sample_Date, Sample_ID, `NH4-N`, `NO3-N`, Ca, Mg, K) |>
+  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
 #moving average for loop
 for (i in 1:nrow(q1_smoothed)) {
   # [i] is our iterator and 1:nrow(q1_sample-date) is our sequence
