@@ -1,44 +1,74 @@
+# EDS-214 Final Project
+ Amapola Garcia
+
 ## Background
-This Github repository containing all of the code that is associated with the post-effect disturbances from Hurricane Hugo 1989. The purposes of this is to recreate the figure.
+This Github repository contains the raw data and R code that is associated to recreate the (figure 3) from Schaefer et al. (2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.
 
 ## Data
-```{r}
-library(tidyverse)
-source("../R/moving-average.R")
-
-prm <- read_csv("../data/RioMameyesPuenteRoto.csv")
-q1 <- read_csv("../data/QuebradaCuenca1-Bisley.csv")
-q2 <- read_csv("../data/QuebradaCuenca2-Bisley.csv")
-q3 <- read_csv("../data/QuebradaCuenca3-Bisley.csv")
-```
-
-## Methods
 The analysis calculates the 9-weeks of moving averages from the chemistry measurments and plots these averages over a time period from 1988 to 1995.
+In the first inital step we are downloading the four raw datasets that are provided by the Enviromental Data.
 ```{r}
-prm_1 <- prm |>
-  select(Sample_Date, Sample_ID, `NH4-N`, `NO3-N`, Ca, Mg, K) |>
-  filter(Sample_Date >= "1988-01-01" & Sample_Date < "1995-01-03")
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+cleaned_data <- read_csv("../output/1_clean_data.csv")
+```
+
+## Methods 
+
+1. Reading the data: Once downloaded we create a folder called data/ folder. Next we assign names to the functions that that will read the csv files.
+
+2. For this project, we are selecting the following rows from each dataset (Sample_Date, Sample_ID, and ions : K, Mg, NH4-N, and NO3-N). From here we are filtering and combining all the rows together. By combining them we are able to select the desired sample dates from 1988-1994.
+
+3. From this step we are then able to pivot our data so that we can prepare to plot our data.
+
+4. After you pivot we can now create a ggplot that will allow you to create a visual of all 5 ions along with the years.
+
+My function is saved here:
+```{r, }
+source("../R/moving-average.R")
 ```
 
 ```{r}
-q1_1 <- q1 |>
-  select(Sample_Date, Sample_ID, `NH4-N`, `NO3-N`, Ca, Mg, K) |>
-  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
+#| echo: false
+#| message: false
+#| warning: false
+read_csv("../data/QuebradaCuenca1-Bisley.csv") |>
+  filter(Sample_Date >= "1988-01-01" & Sample_Date < "1994-12-31") |>
+  moving_average()
 ```
 
-```{r}
-q2_1 <- q2 |>
-  select(Sample_Date, Sample_ID, `NH4-N`, `NO3-N`, Ca, Mg, K) |>
-  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
-```
+For all of my dataframes, you can see the results below.
 
-```{r}
-q3_1 <- q3 |>
-  select(Sample_Date, Sample_ID, `NH4-N`, `NO3-N`, Ca, Mg, K) |>
-  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
-```
 ## Results
+ The figure down below is a replica representation of figure(3) of Scaefer et al.(2000).
+ In the image down below we can see a time series plotted replication that has the Sample_date on the x-axis and the concentration on the y-axis.
+
+After the hurricane, you can see that the concentration levels from Hurrican Hugo increased greatly and stayed elevated throughout the years afterwards. Each of the ion levels are plotted on the y-axis and are found moving aross the average of the 9-week window.
 
 ```{r}
-average_prm_1 <- moving_average(prm_1)
+#| echo: false
+#| message: false
+#| warning: false
+
+ggplot(
+  cleaned_data,
+  mapping = aes(
+    x = Sample_Date,
+    y = Concentration,
+    linetype = site
+  )
+) +
+  geom_line() +
+  facet_wrap(
+    ~Ions,
+    scales = "free",
+    ncol = 1,
+    strip.position = "left"
+  ) +
+  labs(
+    title = "Concentrations from Hurricane Hugo in Bisley, Puerto Rico"
+  )
 ```
