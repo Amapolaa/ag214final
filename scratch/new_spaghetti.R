@@ -1,26 +1,15 @@
-#Use the source() function to load your function.
 source("R/moving-average.R")
-
 library(tidyverse)
 
-##reading my downloaded csv
+#Import the four raw datasets individually
 prm <- read_csv("RioMameyesPuenteRoto.csv")
 q1 <- read_csv("QuebradaCuenca1-Bisley.csv")
 q2 <- read_csv("QuebradaCuenca2-Bisley.csv")
 q3 <- read_csv("QuebradaCuenca3-Bisley.csv")
 
+q1_new <- moving_average(q1)
 
-q1_smooth <- moving_average(q1)
-
-
-# getting a glimpse to see what the atomic types are
-glimpse(q1)
-#initalizing the results by creating a tibble table called q1_sample_date
-qb_1 <- q1 |>
-  select(Sample_Date, K, NO3N, Mg, Ca, NH4N) |>
-  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
-
-#were sequencing the window start for q1 from 5/20/1986 to 12/01/1996 by 9 weeks
+#Create moving average function
 qb_1_smoothed <- tibble(
   window_start = seq(
     ymd(qb_1$Sample_Date[1]),
@@ -33,6 +22,11 @@ qb_1_smoothed <- tibble(
   K = NA,
   Mg = NA
 )
+
+qb_1 <- q1 |>
+  select(Sample_Date, K, NO3N, Mg, Ca, NH4N) |>
+  filter(Sample_Date >= "1986-05-16" & Sample_Date < "1995-01-03")
+
 
 #moving average for loop
 for (i in 1:nrow(qb_1_smoothed)) {

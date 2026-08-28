@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -33,10 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="README_files/libs/quarto-html/anchor.min.js"></script>
 <link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="README_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="README_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -50,31 +53,52 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="effects-of-hurricane-disturbance-on-stream-water-concentrations-and-fluxes-in-eight-tropical-forest-watersheds-of-the-luquillo-experimental-forest-puerto-rico" class="level1">
-<h1>Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico</h1>
+<section id="analysis-code-on-effects-of-hurricane-disturbance-on-stream-water-concentrations-and-fluxes-in-eight-tropical-forest-watersheds-of-the-luquillo-experimental-forest-puerto-rico." class="level1">
+<h1>Analysis code on, “Effects of Hurricane Disturbance on Stream Water Concentrations and Fluxes in Eight Tropical Forest Watersheds of the Luquillo Experimental Forest, Puerto Rico”.</h1>
 <section id="author" class="level2">
 <h2 class="anchored" data-anchor-id="author">Author</h2>
 <p>Garcia, A</p>
 </section>
-<section id="repository-description" class="level2">
-<h2 class="anchored" data-anchor-id="repository-description">Repository Description</h2>
-<p>This Github repository containing all of the code that is associated with the post-effect disturbances from Hurricane Hugo 1989. The purposes of this is to recreate the figure.</p>
-<p>## Repository structure</p>
-<ol type="1">
-<li><p>data : descriptive text</p></li>
-<li><p>docs</p></li>
-<li><p>figs</p></li>
-<li><p>R</p></li>
-<li><p>Reports</p></li>
-<li><p>scratch</p></li>
-<li><p>Output</p></li>
-</ol>
+</section>
+<section id="repository-description" class="level1">
+<h1>Repository Description</h1>
+<p>This Github repository contains the raw data and R code that is associated to recreate the (figure 3) from Schaefer et al.&nbsp;(2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.</p>
+<section id="figure-3-will-be-repoduced-showcasing-the-9-week-moving-averages-for-the-stream-chemistry.-this-repository-will-include-the-following-variables" class="level3">
+<h3 class="anchored" data-anchor-id="figure-3-will-be-repoduced-showcasing-the-9-week-moving-averages-for-the-stream-chemistry.-this-repository-will-include-the-following-variables">(Figure 3) will be repoduced showcasing the 9-week moving averages for the stream chemistry. This repository will include the following variables:</h3>
+<ul>
+<li>Ammonium (NH4)</li>
+<li>Calcium (Ca)</li>
+<li>Potassium (K)</li>
+<li>Magnesium (Mg)</li>
+<li>Nitrate (NO3)</li>
+</ul>
+<p>We will be focusing on the time periods 1988 - 1994 when Hurricane Hugo hit Bisley, Puerto Rico. This will allow us to visually recreate the pattern within the stream-water chemistry.</p>
+</section>
+</section>
+<section id="repository-structure" class="level1">
+<h1>Repository structure</h1>
 <blockquote class="blockquote">
-<h1 id="data">Data</h1>
-<p>McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458 (Accessed 2026-08-25).</p>
+<h2 id="data" class="anchored" data-anchor-id="repository-structure">Data</h2>
+<p>The data folder will include the provided and downloaded raw data that are from the Enviormental Data Initiative.</p>
 </blockquote>
+<p>The four raw datasets we will be working with are being represented as (prm,q1,q2,q3):</p>
+<ul>
+<li>prm &lt;- read_csv(“RioMameyesPuenteRoto.csv”)</li>
+<li>q1 &lt;- read_csv(“QuebradaCuenca1-Bisley.csv”)</li>
+<li>q2 &lt;- read_csv(“QuebradaCuenca2-Bisley.csv”)</li>
+<li>q3 &lt;- read_csv(“QuebradaCuenca3-Bisley.csv”)</li>
+</ul>
+<p>For more information [visit(https://portal.edirepository.org/)]</p>
+<p>McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458 (Accessed 2026-08-25).</p>
+<section id="scatch-folder" class="level2">
+<h2 class="anchored" data-anchor-id="scatch-folder">Scatch Folder</h2>
+<p>This folder holds the new_spaghetti.R code that we have been working on this week.</p>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<p>This folder holds the moving-average.R code where we have reorganized our code without changing the functionality.</p>
 <blockquote class="blockquote">
-<h1 id="references">References</h1>
+<h2 id="references" class="anchored">References</h2>
 <p>Schaefer, Douglas. A., William H. McDowell, Fredrick N. Scatena, and Clyde E. Asbury. 2000. “Effects of Hurricane Disturbance on Stream Water Concentrations and Fluxes in Eight Tropical Forest Watersheds of the Luquillo Experimental Forest, Puerto Rico.” Journal of Tropical Ecology 16 (2): 189–207. https://doi.org/10.1017/s0266467400001358</p>
 </blockquote>
 </section>

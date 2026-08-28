@@ -1,11 +1,20 @@
-# The input to this function should be a data frame containing stream chemistry data
+#source("R/moving-average.R")
+library(tideverse)
+
+#Import the four raw datasets individually
+#prm <- read_csv("RioMameyesPuenteRoto.csv") #ask ale
+q1 <- read_csv("QuebradaCuenca1-Bisley.csv")
+q2 <- read_csv("QuebradaCuenca2-Bisley.csv")
+q3 <- read_csv("QuebradaCuenca3-Bisley.csv")
+
+#create a moving average function
 moving_average <- function(streamdata) {
   # Initialize a tibble to contain the results
   result <- tibble(
     Sample_Date = seq(
       ymd(streamdata$Sample_Date[1]),
       ymd(streamdata$Sample_Date[nrow(streamdata)]),
-      by = "9 weeks",
+      by = "63 days",
     ),
     site = streamdata$Sample_ID[1],
     NH4N = NA,
@@ -15,10 +24,10 @@ moving_average <- function(streamdata) {
     Mg = NA
   )
 
-  # Fill in the iterator and sequence
+  #fill the iterator and sequence
   for (i in 1:nrow(result)) {
     w1 <- result$Sample_Date[i]
-    w2 <- w1 + weeks(9)
+    w2 <- w1 + 63
 
     in_window <- streamdata$Sample_Date >= w1 & streamdata$Sample_Date < w2
     in_window
@@ -41,3 +50,43 @@ moving_average <- function(streamdata) {
   # Return the results
   return(result)
 }
+prm1_new <- moving_average(prm)
+q1_new <- moving_average(q1)
+q2_new <- moving_average(q2)
+q3_new <- moving_average(q3)
+
+#combining all rows into one
+combined_rows <- bind_rows(prm1_new, q1_new, q2_new, q3_new)
+
+plot_data <- combined_rows |>
+  pivot_longer(
+    cols = c(
+      NH4N,
+      NO3N,
+      Ca,
+      K,
+      Mg
+    ),
+    names_to = "Ions",
+    values_to = "Concentration"
+  )
+
+#create a visual
+ggplot(
+  plot_data,
+  mapping = aes(
+    x = Sample_Date,
+    y = Concentration,
+    linetype = site
+  )
+) +
+  geom_line() +
+  facet_wrap(
+    ~Ions,
+    scales = "free",
+    ncol = 1,
+    strip.position = "left"
+  ) +
+  labs(
+    title = " The before and after concentrations from Hurricane Hugo in Bisley, Puerto Rico"
+  )
