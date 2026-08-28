@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,51 +12,19 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -68,10 +36,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="paper_files/libs/quarto-html/anchor.min.js"></script>
 <link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="paper_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="paper_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -85,101 +53,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="eds-214-final-project" class="level1">
+<h1>EDS-214 Final Project</h1>
+<section id="author" class="level3">
+<h3 class="anchored" data-anchor-id="author">Author</h3>
+<p>Amapola Garcia</p>
+</section>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>This Github repository containing all of the code that is associated with the post-effect disturbances from Hurricane Hugo 1989. The purposes of this is to recreate the figure.</p>
+<p>This Github repository contains the raw data and R code that is associated to recreate the (figure 3) from Schaefer et al.&nbsp;(2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.1     ✔ readr     2.2.0
-✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-✔ purrr     1.2.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../R/moving-average.R"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>prm <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/RioMameyesPuenteRoto.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1657 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (8): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, TDNCode, S...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (9): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/QuebradaCuenca1-Bisley.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1847 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (8): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, DOCCode, T...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (9): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>q2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/QuebradaCuenca2-Bisley.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1838 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (9): Sample_ID, NitrateCode, SulfateCode, PotassiumCode, NH4Code, PO4C...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (8): TDP, ChlorideCode, SodiumCode, MagnesiumCode, CalciumCode, DICCod...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>q3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/QuebradaCuenca3-Bisley.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1835 Columns: 39
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr   (9): Sample_ID, NitrateCode, SulfateCode, NH4Code, PO4Code, DOCCode, T...
-dbl  (21): Code, Sample_Time, Gage_Ht, Temp, pH, Cond, Cl, NO3-N, SO4-S, Na,...
-lgl   (8): TDP, ChlorideCode, SodiumCode, PotassiumCode, MagnesiumCode, Calc...
-date  (1): Sample_Date
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
+<p>In the first inital step we are downloading the four raw datasets that are provided by the Enviromental Data. For more information [visit(https://portal.edirepository.org/)]</p>
+<p>McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative.https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458 (Accessed 2026-08-25).</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prm_1 <span class="ot">&lt;-</span> prm <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sample_Date, Sample_ID, <span class="st">`</span><span class="at">NH4-N</span><span class="st">`</span>, <span class="st">`</span><span class="at">NO3-N</span><span class="st">`</span>, Ca, Mg, K) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sample_Date <span class="sc">&gt;=</span> <span class="st">"1986-05-16"</span> <span class="sc">&amp;</span> Sample_Date <span class="sc">&lt;</span> <span class="st">"1995-01-03"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>The analysis calculates the 9-weeks of moving averages from the chemistry measurments and plots these averages over a time period from 1988 to 1995.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The figure down below is a replica representation of figure(3) of Scaefer et al.(2000). In the image down below we can see a time series plotted replication that has the Sample_date on the x-axis and the concentration on the y-axis.</p>
+<p>After the hurricane, you can see that the concentration levels from Hurrican Hugo increased greatly and stayed elevated throughout the years afterwards. Each of the ion levels are plotted on the y-axis and are found moving aross the average of the 9-week window.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>average_prm_1 <span class="ot">&lt;-</span> <span class="fu">moving_average</span>(prm_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
+</div>
+</div>
+</section>
 </section>
 
 </main>

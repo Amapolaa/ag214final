@@ -1,12 +1,17 @@
 # EDS-214 Final Project
+
+### Author
  Amapola Garcia
 
 ## Background
 This Github repository contains the raw data and R code that is associated to recreate the (figure 3) from Schaefer et al. (2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.
 
 ## Data
-The analysis calculates the 9-weeks of moving averages from the chemistry measurments and plots these averages over a time period from 1988 to 1995.
 In the first inital step we are downloading the four raw datasets that are provided by the Enviromental Data.
+For more information [visit(https://portal.edirepository.org/)]
+
+ McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative.https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458 (Accessed 2026-08-25).
+
 ```{r}
 #| echo: false
 #| message: false
@@ -17,30 +22,8 @@ cleaned_data <- read_csv("../output/1_clean_data.csv")
 ```
 
 ## Methods 
+The analysis calculates the 9-weeks of moving averages from the chemistry measurments and plots these averages over a time period from 1988 to 1995.
 
-1. Reading the data: Once downloaded we create a folder called data/ folder. Next we assign names to the functions that that will read the csv files.
-
-2. For this project, we are selecting the following rows from each dataset (Sample_Date, Sample_ID, and ions : K, Mg, NH4-N, and NO3-N). From here we are filtering and combining all the rows together. By combining them we are able to select the desired sample dates from 1988-1994.
-
-3. From this step we are then able to pivot our data so that we can prepare to plot our data.
-
-4. After you pivot we can now create a ggplot that will allow you to create a visual of all 5 ions along with the years.
-
-My function is saved here:
-```{r, }
-source("../R/moving-average.R")
-```
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-read_csv("../data/QuebradaCuenca1-Bisley.csv") |>
-  filter(Sample_Date >= "1988-01-01" & Sample_Date < "1994-12-31") |>
-  moving_average()
-```
-
-For all of my dataframes, you can see the results below.
 
 ## Results
  The figure down below is a replica representation of figure(3) of Scaefer et al.(2000).

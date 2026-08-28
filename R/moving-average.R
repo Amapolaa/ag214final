@@ -1,6 +1,11 @@
+#Filtering the datasets from 1988-1995 and selecting sample_date and 5 ions
+library(tidyverse)
 # The input to this function should be a data frame containing stream chemistry data
 moving_average <- function(streamdata) {
-  # Initialize a tibble to contain the results
+  streamdata <- streamdata |>
+    select(Sample_Date, Sample_ID, K, `NO3-N`, Mg, Ca, `NH4-N`) |>
+    filter(Sample_Date >= "1988-01-01" & Sample_Date < "1994-12-31")
+
   result <- tibble(
     Sample_Date = seq(
       ymd(streamdata$Sample_Date[1]),
