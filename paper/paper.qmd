@@ -4,11 +4,10 @@
  Amapola Garcia
 
 ## Background
-This Github repository contains the raw data and R code that is associated to recreate the (figure 3) from Schaefer et al. (2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.
+This Github repository contains the raw data and R code that is associated to recreate the [Figure 3](Schaefer DouglasA, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. doi:10.1017/S0266467400001358) from Schaefer et al. (2000). The repository showcases the pre and post-effect disturbances from Hurricane Hugo 1989. What they found was deposits of some nutrients such as, potassium, increased greatly post-disturbances and stayed elevated for years afterwards.
 
 ## Data
 In the first inital step we are downloading the four raw datasets that are provided by the Enviromental Data.
-For more information [visit(https://portal.edirepository.org/)]
 
  McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative.https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458 (Accessed 2026-08-25).
 
@@ -55,3 +54,4 @@ ggplot(
     title = "Concentrations from Hurricane Hugo in Bisley, Puerto Rico"
   )
 ```
+Figure 1: A reproduced version of the Concentrations in Bisley, Puerto Rico streams before and after Hurricane Hugo.
