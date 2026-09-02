@@ -17,7 +17,8 @@ In the first inital step we are downloading the four raw datasets that are provi
 #| warning: false
 
 library(tidyverse)
-cleaned_data <- read_csv("../output/1_clean_data.csv")
+
+long_bisley <- read_csv("../output/long_bisley.csv")
 ```
 
 ## Methods 
@@ -36,9 +37,9 @@ After the hurricane, you can see that the concentration levels from Hurrican Hug
 #| warning: false
 
 ggplot(
-  cleaned_data,
+  data = long_bisley,
   mapping = aes(
-    x = Sample_Date,
+    x = window_start,
     y = Concentration,
     linetype = site
   )
